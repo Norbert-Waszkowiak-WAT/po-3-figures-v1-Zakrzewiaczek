@@ -2,6 +2,7 @@
 #define LINE_H
 
 #include "point.h"
+#include <cmath>
 
 class Line
 {

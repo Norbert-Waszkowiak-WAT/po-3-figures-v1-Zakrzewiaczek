@@ -1,4 +1,5 @@
 #include "group.h"
+#include "line.h"
 
 Group::Group() {};
 Group::Group(const Group &other) : lines(other.lines), triangles(other.triangles), quadrilaterals(other.quadrilaterals) {};
@@ -29,7 +30,7 @@ bool Group::equals(const Group &other)
 
 void Group::remove(const Line &t)
 {
-    for(int index = 0; index < lines.size(); index++)
+    for(size_t index = 0; index < lines.size(); index++)
     {
         if(lines[index].equals(t))
         {
@@ -39,7 +40,7 @@ void Group::remove(const Line &t)
 }
 void Group::remove(const Triangle &t)
 {
-    for(int index = 0; index < triangles.size(); index++)
+    for(size_t index = 0; index < triangles.size(); index++)
     {
         if(triangles[index].equals(t))
         {
@@ -49,7 +50,7 @@ void Group::remove(const Triangle &t)
 }
 void Group::remove(const Quadrilateral &t)
 {
-    for(int index = 0; index < quadrilaterals.size(); index++)
+    for(size_t index = 0; index < quadrilaterals.size(); index++)
     {
         if(quadrilaterals[index].equals(t))
         {
@@ -73,7 +74,14 @@ void Group::add(const Quadrilateral &t)
 
 double Group::getSurface()
 {
-    
+    double surface = 0;
+
+    for(size_t index = 0; index < triangles.size(); index++)
+        surface += triangles[index].getSurface();
+    for(size_t index = 0; index < quadrilaterals.size(); index++)
+        surface += quadrilaterals[index].getSurface();
+
+    return surface;
 }
 
 void Group::flip()
